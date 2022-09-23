@@ -1,10 +1,6 @@
 import { serve } from "https://deno.land/std@0.116.0/http/server.ts"
 import { WebSocketServer } from "https://deno.land/x/websocket@v0.1.4/mod.ts"
 import staticFiles from "https://deno.land/x/static_files@1.1.6/mod.ts"
-import { getNetworkAddr } from "https://deno.land/x/local_ip/mod.ts"
-
-const netAddr = await getNetworkAddr ()
-console.dir (netAddr)
 
 // serve public
 const servePublic = req => staticFiles ('public') ({ 
