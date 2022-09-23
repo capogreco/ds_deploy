@@ -13,8 +13,13 @@ const servePublic = req => staticFiles ('public') ({
 })
 
 serve (req => {
-    console.dir (req)    
-    return servePublic (req)
+    console.dir (req)
+    switch (req.url) {
+        case `https://capogreco-ds-deploy.deno.dev/control`:
+            return serveControl (req)
+        case `https://capogreco-ds-deploy.deno.dev/`:
+            return servePublic (req)        
+    }
 }, { addr: ':80' })
 
 // // serve control
