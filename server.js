@@ -14,7 +14,7 @@ const servePublic = req => staticFiles ('public') ({
 
 serve (req => {
     console.dir (req)    
-    servePublic (req)
+    return servePublic (req)
 }, { addr: ':80' })
 
 // // serve control
