@@ -15,10 +15,7 @@ const serveControl = req => staticFiles ('control') ({
 })
 
 serve (req => {
-    // return req => staticFiles ('public') ({ 
-    //     request: req, 
-    //     respondWith: r => r 
-    // })
+    console.dir (req.url)
     return servePublic (req)
     // switch (req.url) {
     //     case `https://capogreco-ds-deploy.deno.dev/control/`:
