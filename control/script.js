@@ -1,5 +1,5 @@
 // Create WebSocket connection.
-const socket = await new WebSocket ('ws://localhost:443')
+const socket = await new WebSocket ('ws://capogreco-ds-deploy.deno.dev/:443')
 
 // Connection opened
 socket.addEventListener('open', () => {

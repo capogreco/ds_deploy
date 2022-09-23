@@ -18,7 +18,7 @@ serve (req => {
     const url = new URL(req.url);
     console.log (url.pathname)
 
-    // return servePublic (req)
+    return servePublic (req)
 
     switch (url.pathname) {
         // case `/control`:
