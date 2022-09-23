@@ -2,7 +2,6 @@ import { serve } from "https://deno.land/std@0.116.0/http/server.ts"
 import { WebSocketServer } from "https://deno.land/x/websocket@v0.1.4/mod.ts"
 import staticFiles from "https://deno.land/x/static_files@1.1.6/mod.ts"
 import { getNetworkAddr } from "https://deno.land/x/local_ip/mod.ts"
-import { serveTls } from "https://deno.land/std@0.157.0/http/server.ts";
 
 const netAddr = await getNetworkAddr ()
 console.dir (netAddr)
@@ -14,15 +13,6 @@ const servePublic = (req) => staticFiles ('public') ({
 })
 
 serve(req => servePublic (req), { addr: ':80' })
-
-const certFile = "./192.168.1.172.pem"
-const keyFile = "./192.168.1.172-key.pem"
-
-// const certFile = "/Users/thomas/Library/Application Support/mkcert/rootCA.pem"
-// const keyFile = "/Users/thomas/Library/Application Support/mkcert/rootCA-key.pem"
-
-
-serveTls (req => servePublic (req), { certFile, keyFile })
 
 // serve control
 const serveControl = (req) => staticFiles ('control') ({ 
