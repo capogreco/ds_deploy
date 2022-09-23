@@ -1,5 +1,9 @@
-import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
-import { serveDir } from "https://deno.land/std@$STD_VERSION/http/file_server.ts";
+import { serve } from "https://deno.land/std@0.157.0/http/server.ts";
+import { serveDir } from "https://deno.land/std@0.157.0/http/file_server.ts";
+
+serve (req => serveDir (req, { fsRoot: `public`}))
+
+
 
 // serve((req) => {
 //     const pathname = new URL(req.url).pathname;
@@ -13,4 +17,3 @@ import { serveDir } from "https://deno.land/std@$STD_VERSION/http/file_server.ts
 // });
 
 
-serve (req => serveDir (req, { fsRoot: `public`}))
