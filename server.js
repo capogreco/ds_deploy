@@ -3,7 +3,9 @@ import { WebSocketServer } from "https://deno.land/x/websocket@v0.1.4/mod.ts"
 import staticFiles from "https://deno.land/x/static_files@1.1.6/mod.ts"
 
 // serve public
-const servePublic = req => staticFiles ('public') ({ 
+const servePublic = req => {
+    return staticFiles ('public')
+} ({ 
     request: req, 
     respondWith: r => r 
 })
