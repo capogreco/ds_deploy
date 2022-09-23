@@ -7,12 +7,15 @@ const netAddr = await getNetworkAddr ()
 console.dir (netAddr)
 
 // serve public
-const servePublic = (req) => staticFiles ('public') ({ 
+const servePublic = req => staticFiles ('public') ({ 
     request: req, 
-    respondWith: (r) => r 
+    respondWith: r => r 
 })
 
-serve(req => servePublic (req), { addr: ':80' })
+serve (req => {
+    console.log (req)
+    servePublic (req), { addr: ':80' }
+})
 
 // // serve control
 // const serveControl = (req) => staticFiles ('control') ({ 
