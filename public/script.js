@@ -1,6 +1,6 @@
 
 // Create WebSocket connection
-const ws_address = `ws://192.168.1.172:443`
+const ws_address = `wss://capogreco-ds-deploy.deno.dev/`
 const socket = new WebSocket (ws_address)
 
 // Connection opened
