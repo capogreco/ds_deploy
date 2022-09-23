@@ -8,20 +8,21 @@ const servePublic = req => staticFiles ('public') ({
     respondWith: r => r 
 })
 
+// // serve control
+const serveControl = (req) => staticFiles ('control') ({ 
+    request: req, 
+    respondWith: (r) => r 
+})
+
 serve (req => {
     switch (req.url) {
-        case `https://capogreco-ds-deploy.deno.dev/control`:
+        case `https://capogreco-ds-deploy.deno.dev/control/`:
             return serveControl (req)
         case `https://capogreco-ds-deploy.deno.dev/`:
             return servePublic (req)        
     }
 }, { addr: ':80' })
 
-// // serve control
-// const serveControl = (req) => staticFiles ('control') ({ 
-//     request: req, 
-//     respondWith: (r) => r 
-// })
 
 // serve((req) => serveControl (req), { addr: ':8000' })
 
