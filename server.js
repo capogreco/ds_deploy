@@ -9,7 +9,7 @@ const servePublic = req => staticFiles ('public') ({
 })
 
 // serve control
-const serveControl = req => staticFiles ('control') ({ 
+const serveControl = req => staticFiles (`${ Deno.cwd () }/control`) ({ 
     request: req, 
     respondWith: r => r 
 })
