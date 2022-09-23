@@ -9,10 +9,10 @@ const servePublic = req => staticFiles ('public') ({
 })
 
 // serve control
-// const serveControl = req => staticFiles ('control') ({ 
-//     request: req, 
-//     respondWith: r => r 
-// })
+const serveControl = req => staticFiles ('control') ({ 
+    request: req, 
+    respondWith: r => r 
+})
 
 serve (req => {
     const url = new URL(req.url);
