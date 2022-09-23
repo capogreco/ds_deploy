@@ -15,16 +15,19 @@ const servePublic = req => staticFiles ('public') ({
 // })
 
 serve (req => {
-    // const url = new URL(req.url);
-    // console.log (url.pathname)
+    const url = new URL(req.url);
+    console.log (url.pathname)
 
-    return servePublic (req)
-    // switch (url.pathname) {
-    //     // case `/control`:
-    //     //     return serveControl (req)
-    //     case `/`:
-    //         return servePublic (req)
-    // }
+    // return servePublic (req)
+
+    switch (url.pathname) {
+        // case `/control`:
+        //     return serveControl (req)
+        case `/`:
+            return servePublic (req)
+        case ``:
+            return servePublic (req)
+        }
 }, { addr: ':80' })
 
 
