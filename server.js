@@ -1,6 +1,23 @@
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { serve } from "https://deno.land/std@$STD_VERSION/http/server.ts";
+import { serveDir } from "https://deno.land/std@$STD_VERSION/http/file_server.ts";
+
+serve((req) => {
+    const pathname = new URL(req.url).pathname;
+    if (pathname.startsWith("/")) {
+        return serveDir(req, {
+            fsRoot: `${ Deno.cwd () }/public`,
+        });
+    }
+    // Do dynamic responses
+    return new Response();
+});
+
+/*
+
+(import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
 import { WebSocketServer } from "https://deno.land/x/websocket@v0.1.4/mod.ts"
 import staticFiles from "https://deno.land/x/static_files@1.1.6/mod.ts"
+import { acceptWebSocket } from "https://deno.land/std@0.9/ws/mod.ts"
 
 // serve public
 const servePublic = req => staticFiles ('public') ({ 
@@ -21,11 +38,9 @@ serve (req => {
     switch (url.pathname) {
         case `/control`:
             return serveControl (req)
+        case `/`:
+            return servePublic (req)
     }
-    
-    // return servePublic (req)
-    return serveControl (req)
-
 }, { addr: ':80' })
 
 
@@ -63,3 +78,4 @@ wss.on ("connection", function (ws) {
     })
 })
 
+*/
