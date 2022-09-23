@@ -15,14 +15,15 @@ const serveControl = req => staticFiles ('control') ({
 })
 
 serve (req => {
-    console.log (req.url)
-    return servePublic (req)
-    // switch (req.url) {
-    //     case `https://capogreco-ds-deploy.deno.dev/control/`:
-    //         return serveControl (req)
-    //     case `https://capogreco-ds-deploy.deno.dev/`:
-    //         return servePublic (req)        
-    // }
+    const url = new URL(req.url);
+
+    // return servePublic (req)
+    switch (url.pathname) {
+        case `/control`:
+            return serveControl (req)
+        case `/`:
+            return servePublic (req)        
+    }
 }, { addr: ':80' })
 
 
