@@ -1,31 +1,38 @@
-import { serve } from "https://deno.land/std@0.116.0/http/server.ts"
-import { WebSocketServer } from "https://deno.land/x/websocket@v0.1.4/mod.ts"
-import staticFiles from "https://deno.land/x/static_files@1.1.6/mod.ts"
+import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { serveFile } from "https://deno.land/std@0.140.0/http/file_server.ts";
+
+serve(async (req) => {
+  return await serveFile (req, `${Deno.cwd()}/public/index.html`);
+})
+
+
+// import { WebSocketServer } from "https://deno.land/x/websocket@v0.1.4/mod.ts"
+// import staticFiles from "https://deno.land/x/static_files@1.1.6/mod.ts"
 
 // serve public
-const servePublic = req => staticFiles ('public') ({ 
-    request: req, 
-    respondWith: r => r 
-})
+// const servePublic = req => staticFiles ('public') ({ 
+//     request: req, 
+//     respondWith: r => r 
+// })
 
 // serve control
-const serveControl = req => staticFiles ('control') ({ 
-    request: req, 
-    respondWith: r => r 
-})
+// const serveControl = req => staticFiles ('control') ({ 
+//     request: req, 
+//     respondWith: r => r 
+// })
 
-serve (req => {
-    // const url = new URL(req.url);
-    // console.log (url.pathname)
+// serve (req => {
+//     // const url = new URL(req.url);
+//     // console.log (url.pathname)
 
-    return servePublic (req)
-    // switch (url.pathname) {
-    //     // case `/control`:
-    //     //     return serveControl (req)
-    //     case `/`:
-    //         return servePublic (req)
-    // }
-}, { addr: ':80' })
+//     return servePublic (req)
+//     // switch (url.pathname) {
+//     //     // case `/control`:
+//     //     //     return serveControl (req)
+//     //     case `/`:
+//     //         return servePublic (req)
+//     // }
+// }, { addr: ':80' })
 
 
 // serve((req) => serveControl (req), { addr: ':8000' })
