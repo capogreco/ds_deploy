@@ -19,8 +19,8 @@ serve (req => {
 
     // return servePublic (req)
     switch (url.pathname) {
-        case `/control`:
-            return serveControl (req)
+        // case `/control`:
+        //     return serveControl (req)
         case `/`:
             return servePublic (req)        
     }
