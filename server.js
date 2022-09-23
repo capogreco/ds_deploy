@@ -18,16 +18,13 @@ serve (req => {
     const url = new URL(req.url);
     console.log (url.pathname)
 
+    switch (url.pathname) {
+        case `/control`:
+            return serveControl (req)
+    }
+    
     return servePublic (req)
 
-    switch (url.pathname) {
-        // case `/control`:
-        //     return serveControl (req)
-        case `/`:
-            return servePublic (req)
-        case ``:
-            return servePublic (req)
-        }
 }, { addr: ':80' })
 
 
