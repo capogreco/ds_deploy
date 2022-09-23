@@ -5,7 +5,7 @@ serve((req) => {
     const pathname = new URL(req.url).pathname;
     if (pathname.startsWith (`/`)) {
         return serveDir (req, {
-            fsRoot: `/public`,
+            fsRoot: `public`,
         })
     }
     // Do dynamic responses
