@@ -31,35 +31,35 @@ serve (req => {
 
 // serve((req) => serveControl (req), { addr: ':8000' })
 
-// const wss = new WebSocketServer ()
+const wss = new WebSocketServer ()
 
-// wss.on ("connection", function (ws) {
+wss.on ("connection", function (ws) {
 
-//     wss.clients.forEach (c => {
-//         if (c.state == 3) wss.clients.delete (c)
-//     })
+    wss.clients.forEach (c => {
+        if (c.state == 3) wss.clients.delete (c)
+    })
 
-//     console.dir (`${ wss.clients.size } connections`)
+    // console.dir (`${ wss.clients.size } connections`)
 
-//     ws.on ("message", msg => {
-//         const obj = JSON.parse (msg)
-//         switch (obj.type) {
-//             case `greeting`:
-//                 console.log (obj.body)
-//                 break
-//             case `control`:
-//                 console.log (`control: ${ obj.body }`)
-//                 break
-//             case `save`:
-//                 console.log (`saving to ${ obj.body }`)
-//                 break
-//             case `load`:
-//                 console.log (`loading from ${ obj.body }`)
-//                 break
-//             case `is_playing`:
-//                 console.log (`is playing? ${ obj.body }`)
-//         }
-//         wss.clients.forEach (c => c.send (msg))
-//     })
-// })
+    ws.on ("message", msg => {
+        const obj = JSON.parse (msg)
+        // switch (obj.type) {
+        //     case `greeting`:
+        //         console.log (obj.body)
+        //         break
+        //     case `control`:
+        //         console.log (`control: ${ obj.body }`)
+        //         break
+        //     case `save`:
+        //         console.log (`saving to ${ obj.body }`)
+        //         break
+        //     case `load`:
+        //         console.log (`loading from ${ obj.body }`)
+        //         break
+        //     case `is_playing`:
+        //         console.log (`is playing? ${ obj.body }`)
+        // }
+        wss.clients.forEach (c => c.send (msg))
+    })
+})
 
