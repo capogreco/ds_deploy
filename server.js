@@ -4,23 +4,28 @@ import { serveFile } from "https://deno.land/std@0.157.0/http/file_server.ts?s=s
 
 const req_handler = async req => {
 
+    const path = new URL (req.url).pathname
+
     const upgrade = req.headers.get ("upgrade") || ""
 
     if (upgrade.toLowerCase() == "websocket") {
         console.log (`websocket called`)
-        const { socket } = Deno.upgradeWebSocket (req)
-        console.log (socket)
 
-        socket.onopen = () => console.log("socket opened");
-        socket.onmessage = (e) => {
-          console.log("socket message:", e.data);
-          socket.send(new Date().toString());
-        };
-        socket.onerror = (e) => console.log("socket errored:", e.message);
+        const { socket, response } = Deno.upgradeWebSocket (req)
+
+        socket.onopen = () => console.log ("socket opened")
+        socket.onmessage = e => {
+          console.log ("socket message:", e.data);
+
+        //   socket.send (new Date().toString ());
+        }
+
+        socket.onerror = e => console.log ("socket errored:", e.message)
         socket.onclose = () => console.log("socket closed");
+
+        return response
     }
 
-    const path = new URL (req.url).pathname
 
     switch (path) {
         case "/control":
