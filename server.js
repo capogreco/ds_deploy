@@ -5,11 +5,13 @@ import * as uuid from "https://deno.land/std@0.119.0/uuid/mod.ts";
 let sockets = []
 const req_handler = async req => {
 
+    const path = new URL (req.url).pathname
+
     const upgrade = req.headers.get ("upgrade") || ""
 
     if (upgrade.toLowerCase() == "websocket") {
         console.log (`websocket called`)
-        const { socket } = Deno.upgradeWebSocket (req)
+        const { socket, response } = Deno.upgradeWebSocket (req)
         console.log (socket)
 
         const socketId = uuid.v2.generate()
@@ -32,9 +34,10 @@ const req_handler = async req => {
         socket.onclose = () => {
             sockets = sockets.filter(socket => socket.socketId !== socketId);
         }
+
+        return response
     }
 
-    const path = new URL (req.url).pathname
 
     switch (path) {
         case "/control":
