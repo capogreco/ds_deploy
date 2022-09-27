@@ -1,7 +1,8 @@
 import { serve } from "https://deno.land/std@0.157.0/http/server.ts"
 import { serveFile } from "https://deno.land/std@0.157.0/http/file_server.ts?s=serveFile"
+import * as uuid from "https://deno.land/std@0.119.0/uuid/mod.ts";
 
-
+let sockets = []
 const req_handler = async req => {
 
     const upgrade = req.headers.get ("upgrade") || ""
@@ -11,13 +12,26 @@ const req_handler = async req => {
         const { socket } = Deno.upgradeWebSocket (req)
         console.log (socket)
 
-        socket.onopen = () => console.log("socket opened");
+        const socketId = uuid.v2.generate()
+        socket.onopen = () => {
+            console.log("socket opened");
+            sockets.push({
+                socket,
+                socketId
+            })
+        }
         socket.onmessage = (e) => {
           console.log("socket message:", e.data);
-          socket.send(new Date().toString());
+          if(e.type === "control"){
+              sockets.forEach(socket => socket.socket.send(e))
+          }else{
+              socket.send(new Date().toString());
+          }
         };
         socket.onerror = (e) => console.log("socket errored:", e.message);
-        socket.onclose = () => console.log("socket closed");
+        socket.onclose = () => {
+            sockets = sockets.filter(socket => socket.socketId !== socketId);
+        }
     }
 
     const path = new URL (req.url).pathname
