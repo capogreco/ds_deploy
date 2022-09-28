@@ -10,7 +10,7 @@ const req_handler = async req => {
     const upgrade = req.headers.get ("upgrade") || ""
 
     if (upgrade.toLowerCase() == "websocket") {
-        console.log (`websocket called`)
+
         const { socket, response } = Deno.upgradeWebSocket (req)
 
         const id = uuid.v1.generate ()
@@ -22,25 +22,14 @@ const req_handler = async req => {
             })
         }
 
-        socket.onmessage = e => {
-
-            // const msg = JSON.parse (e.data)
-            sockets.forEach (s => s.socket.send (e.data))
-
-            // if (msg.type === "control") {
-            //     console.log (`sending control`)
-            // }
-
-            // else {
-            //     console.log (`message received: ${ msg }`)
-            // }
-
-        }
+        socket.onmessage = e => sockets.forEach (s => {
+            s.socket.send (e.data)
+        })
 
         socket.onerror = e => console.log("socket errored:", e.message)
 
         socket.onclose = () => {
-            sockets = sockets.filter (socket => socket.id !== id)
+            sockets = sockets.filter (s => s.id !== id)
         }
 
         return response
