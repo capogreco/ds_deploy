@@ -24,16 +24,16 @@ const req_handler = async req => {
 
         socket.onmessage = e => {
 
-            const msg = JSON.parse (e.data)
+            // const msg = JSON.parse (e.data)
+            sockets.forEach (s => s.socket.send (e.data))
 
-            if (msg.type === "control") {
-                console.log (`sending control`)
-                sockets.forEach (s => s.socket.send (e.data))
-            }
+            // if (msg.type === "control") {
+            //     console.log (`sending control`)
+            // }
 
-            else {
-                console.log (`message received: ${ msg }`)
-            }
+            // else {
+            //     console.log (`message received: ${ msg }`)
+            // }
 
         }
 
