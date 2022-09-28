@@ -23,7 +23,9 @@ const req_handler = async req => {
         }
 
         socket.onmessage = e => sockets.forEach (s => {
-            s.socket.send (e.data)
+            const obj = JSON.parse (e.data)
+            obj.sockets = sockets
+            s.socket.send (JSON.stringify (obj))
         })
 
         socket.onerror = e => console.log("socket errored:", e.message)
