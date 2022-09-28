@@ -3,7 +3,7 @@ document.body.style.overflow = `hidden`
 document.body.style.backgroundColor = `black`
 
 // Create WebSocket connection.
-const socket = await new WebSocket ('ws://capogreco-ds-deploy.deno.dev/')
+const socket = await new WebSocket ('wss://capogreco-ds-deploy.deno.dev/')
 // const socket = await new WebSocket ('ws://localhost')
 
 // Connection opened
