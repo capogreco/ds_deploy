@@ -20,6 +20,7 @@ const save_bank = Array (10).fill ()
 
 // Listen for messages
 socket.addEventListener('message', event => {
+    console.log (event)
     const obj = JSON.parse (event.data)
     switch (obj.type) {
         case `greeting`:
