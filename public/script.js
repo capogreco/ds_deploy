@@ -192,7 +192,7 @@ function do_physics () {
     }
 }
 
-let square_colour = `deeppink`
+let square_colour = `white`
 
 function draw_frame () {
     c_ctx.fillStyle = `turquoise`
@@ -220,7 +220,7 @@ document.onclick = async () => {
         // create an async function to request a wake lock
         try {
             wakeLock = await navigator.wakeLock.request ('screen');
-            square_colour = `white`
+            square_colour = `deeppink`
             console.log ('Wake Lock is active!')
         } catch (err) {
             // The Wake Lock request has failed - usually system related, such as battery.
